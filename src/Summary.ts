@@ -1,4 +1,3 @@
-import { ConsoleReport } from './ConsoleReport';
 import { MatchData } from './MatchData';
 
 export interface Analyzer {
@@ -11,5 +10,9 @@ export interface OutputTarget {
 
 export class Summary {
   constructor(public analyzer: Analyzer, public outputTarget: OutputTarget) {}
-  buildAndPrintReport() {}
+
+  buildAndPrintReport(matches: MatchData[]): void {
+    const report = this.analyzer.run(matches);
+    this.outputTarget.print(report);
+  }
 }
